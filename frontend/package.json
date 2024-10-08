@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@nuxtjs/storybook": "^8.3.1",
+    "@storybook-vue/nuxt": "^8.3.1",
     "nuxt": "^3.13.0",
     "vue": "latest",
     "vue-router": "latest"
