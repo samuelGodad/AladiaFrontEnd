@@ -43,4 +43,4 @@ jobs:
           done
 
       - name: Run Cypress with Chromatic for E2E Tests
-        run: ELECTRON_EXTRA_LAUNCH_ARGS=--remote-debugging-port=9222 npx chromatic --cypress --project-token="chpt_1f954416355a5d8" --exit-zero-on-changes
+        run: ELECTRON_EXTRA_LAUNCH_ARGS=--remote-debugging-port=9222 npx chromatic --cypress --project-token="chpt_2ad3ebaa4a0c9df" --exit-zero-on-changes
