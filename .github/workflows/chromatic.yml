@@ -26,15 +26,14 @@ jobs:
         run: npm install -g pnpm
 
       - name: Install dependencies
-        working-directory: frontend-nuxt
         run: pnpm install --legacy-peer-deps
+        working-directory: frontend-nuxt
 
       - name: Run Chromatic
-        working-directory: frontend-nuxt
         uses: chromaui/action@latest
         with:
           projectToken: "chpt_2ad3ebaa4a0c9df"
           exitZeroOnChanges: true
           onlyChanged: true
           zip: true
-
+        working-directory: frontend-nuxt
