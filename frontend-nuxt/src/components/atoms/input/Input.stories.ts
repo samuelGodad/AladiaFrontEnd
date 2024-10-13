@@ -1,53 +1,91 @@
 import Input from "./Input.vue";
-import type { StoryFn } from "@storybook/vue3";
 
-// Define the type for the props of the Input component
-interface InputProps {
-  type?: "text" | "password" | "email";
-  placeholder?: string;
-  size?: "small" | "medium" | "large";
-}
-
-// Storybook default export
-export default {
+const Meta = {
   title: "Atoms/Input",
   component: Input,
+  tags: ["autodocs"],
   argTypes: {
-    size: {
-      control: { type: "select", options: ["small", "medium", "large"] },
+    type: {
+      control: "select",
+      options: ["text", "email", "password", "number"],
     },
+    maxlength: { control: { type: "number" } },
+    placeholder: { control: { type: "text" } },
+    inputSize: {
+      control: "select",
+      options: ["small", "medium", "large"],
+    },
+
+    textColor: { control: "color" },
+    backgroundColor: { control: "color" },
+    disabled: { control: "boolean" },
+  },
+  args: {
+    type: "text",
+    maxlength: 100,
+    placeholder: "Enter your input",
+    inputSize: "medium",
+    textColor: "black",
+    backgroundColor: "white",
+    disabled: false,
+  },
+};
+export default Meta;
+
+export const Default = {
+  args: {
+    type: "text",
+    maxlength: 100,
+    placeholder: "Enter your input",
+    modelValue: "",
   },
 };
 
-// Template for the stories
-const Template: StoryFn<InputProps> = (args) => ({
-  components: { Input },
-  setup() {
-    return { args };
+export const EmailInput = {
+  args: {
+    type: "email",
+    placeholder: "Enter your email",
+    modelValue: "",
   },
-  template: '<Input v-bind="args" />',
-});
-
-// Default story
-export const Default = Template.bind({});
-Default.args = {
-  type: "text",
-  placeholder: "Enter text...",
-  size: "medium",
 };
 
-// Small Input story
-export const SmallInput = Template.bind({});
-SmallInput.args = {
-  type: "text",
-  placeholder: "Small input",
-  size: "small",
+export const DisabledEmailInput = {
+  args: {
+    type: "email",
+    placeholder: "Email (Disabled)",
+    modelValue: "email@example.com",
+    disabled: true,
+  },
 };
 
-// Large Input story
-export const LargeInput = Template.bind({});
-LargeInput.args = {
-  type: "password",
-  placeholder: "Enter password...",
-  size: "large",
+export const PasswordInput = {
+  args: {
+    type: "password",
+    placeholder: "Enter your password",
+    modelValue: "",
+  },
+};
+
+export const ConfirmPasswordInput = {
+  args: {
+    type: "password",
+    placeholder: "Confirm your password",
+    modelValue: "",
+  },
+};
+
+export const NameInput = {
+  args: {
+    type: "text",
+    placeholder: "Enter your name",
+    modelValue: "",
+  },
+};
+
+export const SurnameInput = {
+  args: {
+    type: "text",
+    placeholder: "Enter your surname",
+    modelValue: "",
+  },
 };
