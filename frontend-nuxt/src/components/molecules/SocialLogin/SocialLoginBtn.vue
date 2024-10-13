@@ -9,6 +9,3 @@
 import  '@/components/atoms/Button/Button.vue';
 </script>
 
-<style scoped>
-/* You can add styles for social buttons here */
-</style>

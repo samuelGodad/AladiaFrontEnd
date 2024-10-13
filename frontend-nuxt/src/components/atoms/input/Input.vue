@@ -1,42 +1,116 @@
 <template>
   <input
-    :class="classes"
-    v-model="inputValue"
+    :type="props.type"
+    :maxlength="props.maxlength"
+    :placeholder="props.placeholder"
+    :value="props.modelValue"
     @input="emitInput"
-    :placeholder="placeholder"
-    :type="type"
+    :disabled="props.disabled"
+    :class="classes"
+    :style="style"
+    @focus="handleFocus"
+    @blur="handleBlur"
   />
 </template>
 
 <script lang="ts" setup>
-import { computed, ref } from 'vue';
+import { ref, computed } from "vue";
 
-// Define props with TypeScript
 const props = defineProps<{
-  type?: 'text' | 'password' | 'email';
+  type?: string;
+  maxlength?: number;
   placeholder?: string;
-  size?: 'small' | 'medium' | 'large';
+  modelValue?: string | number;
+  disabled?: boolean;
+  inputSize?: "small" | "medium" | "large";
+  textColor?: string;
+  backgroundColor?: string;
 }>();
 
-// Define emit function
 const emit = defineEmits<{
-  (event: 'update:modelValue', value: string): void; // Emit the modelValue update
+  (e: "update:modelValue", value: string | number): void;
 }>();
 
-const inputValue = ref(''); // Local state for the input value
+const isFocused = ref(false);
 
+const handleFocus = () => {
+  isFocused.value = true;
+};
+
+const handleBlur = () => {
+  isFocused.value = false;
+};
+
+// Compute the dynamic classes for the input element
 const classes = computed(() => ({
-  'p-2': true,
-  'text-sm': props.size === 'small',
-  'text-base': props.size === 'medium' || !props.size,
-  'text-lg': props.size === 'large',
+  "custom-input": true,
+  "custom-input--disabled": props.disabled,
+  [`custom-input--${props.inputSize || "medium"}`]: true,
+  "input-email": props.type === "email",
+  "input-password": props.type === "password",
 }));
 
-const emitInput = () => {
-  emit('update:modelValue', inputValue.value); // Emit the input value when it changes
+// Compute the dynamic style for the input element
+const style = computed(() => ({
+  color: props.textColor || "inherit",
+  backgroundColor: props.backgroundColor || "inherit",
+}));
+
+// Emit the input event with the updated value
+const emitInput = (event: Event) => {
+  const target = event.target as HTMLInputElement;
+  emit("update:modelValue", target.value);
 };
 </script>
 
 <style scoped>
-/* Add any additional styles here if necessary */
+.custom-input {
+  font-family: "Inter", ui-sans-serif, system-ui;
+  padding: 8px;
+  border: none;
+  width: 100%;
+  transition: padding 0.3s;
+}
+
+.custom-input::placeholder {
+  color: rgba(0, 0, 0, 0.5);
+  transition: transform 0.3s, font-size 0.3s, opacity 0.3s;
+  opacity: 1;
+}
+
+.custom-input:focus::placeholder {
+  transform: translateX(-9rem) scale(0.7);
+}
+
+.custom-input:focus {
+  outline: none;
+}
+
+.custom-input--small {
+  font-size: 12px;
+  padding: 8px;
+}
+
+.custom-input--medium {
+  font-size: 16px;
+  padding: 8px;
+}
+
+.custom-input--large {
+  font-size: 20px;
+  padding: 12px;
+}
+
+.custom-input--disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.input-email {
+  background-color: #f3f4f6;
+}
+
+.input-password {
+  font-family: "Courier New", Courier, monospace;
+}
 </style>
