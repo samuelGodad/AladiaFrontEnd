@@ -15,24 +15,30 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Install pnpm
+      - name: Install npm
         run: |
-          npm install -g pnpm
+          npm install -g npm
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: "22"
-          cache: "pnpm"
+          cache: "npm"
 
       - name: Install Dependencies
-        run: pnpm install
+        run: |
+          cd frontend-nuxt
+          npm install
 
       - name: Build Application
-        run: pnpm build
+        run: |
+          cd frontend-nuxt
+          npm build
 
       - name: Start Application
-        run: pnpm start &
+        run: |
+          cd frontend-nuxt
+          npm start &
         env:
           PORT: 3000
 
