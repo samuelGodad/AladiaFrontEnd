@@ -27,7 +27,7 @@ jobs:
       - name: Install dependencies
         run: |
           cd frontend-nuxt
-          npm install
+          pnpm install --legacy-peer-deps
 
       - name: Run Chromatic
         uses: chromaui/action@latest
