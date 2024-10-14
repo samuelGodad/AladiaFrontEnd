@@ -12,15 +12,24 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install pnpm
+        run: npm install -g pnpm
+
+      - name: Install dependencies
+        run: pnpm install
+
       - name: Cypress run
         uses: cypress-io/github-action@v6
         env:
           ELECTRON_EXTRA_LAUNCH_ARGS: --remote-debugging-port=9222
         with:
           build: |
-            cd frontend-nuxt
-            npm run build
+            pnpm run build
           start: |
-            cd frontend-nuxt
-            npm run preview
+            pnpm run preview
           browser: chrome

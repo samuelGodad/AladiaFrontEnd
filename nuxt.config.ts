@@ -1,5 +1,6 @@
 import { defineNuxtConfig } from "nuxt/config";
 import { resolve } from "path";
+
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   compatibilityDate: "2024-04-03",
@@ -8,6 +9,7 @@ export default defineNuxtConfig({
   css: ["/assets/css/main.css"],
   alias: {
     "@": resolve(__dirname, "./src"),
+    "@components": resolve(__dirname, "./src/components"), // Add this line
   },
 
   postcss: {
@@ -22,7 +24,7 @@ export default defineNuxtConfig({
   vite: {
     build: {
       rollupOptions: {
-        external: ["vue"], // Mark Vue as external
+        
       },
     },
   },

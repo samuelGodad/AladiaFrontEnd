@@ -1,4 +1,4 @@
-import InputWithIcon from "./InputWithIcon.vue";
+import InputWithIcon from "./inputWithIcon.vue";
 
 const Meta = {
   title: "Molecules/InputWithIcon",

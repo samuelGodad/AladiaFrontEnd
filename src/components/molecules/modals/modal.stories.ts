@@ -1,6 +1,6 @@
 /** @format */
 
-import Modal from "./Modal.vue";
+import Modal from "./modal.vue";
 
 const meta = {
   title: "Molecules/Modal",
